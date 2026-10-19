@@ -155,7 +155,8 @@ export async function processPayouts({
     payoutFee: workspace.payoutFee,
   });
 
-  if (!payoutFee) {
+  // 0 is a valid fee. null means it could not be calculated.
+  if (payoutFee == null) {
     throw new Error("Failed to calculate payout fee.");
   }
 
