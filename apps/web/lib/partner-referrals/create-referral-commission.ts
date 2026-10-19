@@ -169,6 +169,9 @@ export const createReferralCommission = async (
         partnerId,
         programId,
         type: "sale",
+        // Earned means pending, processed, or paid. Refunded, fraud, duplicate,
+        // canceled, and held commissions keep their earnings and must not count.
+        status: { in: ["pending", "processed", "paid"] },
       },
       _sum: {
         earnings: true,
