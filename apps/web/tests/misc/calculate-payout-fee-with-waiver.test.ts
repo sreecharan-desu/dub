@@ -9,6 +9,23 @@ describe("calculatePayoutFeeWithWaiver", () => {
   const payoutFee = 0.03; // 3% fee
   const cardPayoutFee = payoutFee + CARD_PAYOUT_HARD_COST_RATE;
 
+  it("charges nothing when the payout fee is 0", () => {
+    const result = calculatePayoutFeeWithWaiver({
+      payoutAmount: 10000, // $100.00
+      payoutFee: 0,
+      payoutFeeWaiverLimit: 0,
+      payoutFeeWaiverUsage: 0,
+      paymentMethod: "ach",
+    });
+
+    expect(result).toEqual({
+      fee: 0,
+      feeFreeAmount: 0,
+      feeChargedAmount: 10000,
+      feeWaiverRemaining: 0,
+    });
+  });
+
   it("zero waiver limit (backward compatibility)", () => {
     const result = calculatePayoutFeeWithWaiver({
       payoutAmount: 10000, // $100.00

@@ -10,9 +10,9 @@ export const calculatePayoutFeeForMethod = ({
   payoutFee,
 }: {
   paymentMethod: Stripe.PaymentMethod.Type;
-  payoutFee: number | undefined;
+  payoutFee: number | null | undefined;
 }) => {
-  if (!paymentMethod || payoutFee === undefined || payoutFee === null) {
+  if (!paymentMethod || payoutFee == null) {
     return null;
   }
 
